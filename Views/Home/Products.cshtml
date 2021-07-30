@@ -1,0 +1,38 @@
+﻿
+@{
+    ViewBag.Title = "Products";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<br />
+<h1>Products</h1>
+
+<br>
+<p>The following table list all the products that are available to the public.</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Price</th>
+            <th>Creation Year</th>
+            <th>Certified (Y/N)*</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var p in ViewBag.ProductList) {
+            <tr>
+                <td>@p.Name</td>
+                <td>@p.Price</td>
+                <td>@p.CreationYear</td>
+                <td>@p.Certified</td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<br>
+<p class="alert-info">
+    *Please note; products marked as certified have passed the European certifications such as: EN14450, EN1143 & EN1047.
+    <br>Our products should also be compliant with US certifications such as UL and ETL.
+</p>
+

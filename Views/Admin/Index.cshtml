@@ -1,0 +1,46 @@
+﻿
+@{
+    ViewBag.Title = "Admin";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<br />
+<h1>Admin Page</h1>
+
+@{
+    if (null != Context.Session && 0 != Context.Session.Keys.Count) {
+        Response.Redirect("~/Home/Index");
+    }
+}
+
+@if (null != ViewBag.ErrorMessage) {
+    <div class="alert-danger">
+        <p>@ViewBag.ErrorMessage</p>
+    </div>
+}
+<br>
+
+<form method="POST" action="" class="form">
+    <div class="form-group row">
+        <label for="username" class="col-sm-2 col-form-label">Username</label>
+        <div class="col-sm-1">
+            <input type="text" class="form-control-lg" id="username" name="username" value="" style="border: 1px grey solid;" autocomplete="off">
+        </div>
+    </div>
+    <div class="form-group row">
+        <label for="password" class="col-sm-2 col-form-label">Password</label>
+        <div class="col-sm-1">
+            <input type="password" class="form-control-lg" id="password" name="password" value="" style="border: 1px grey solid;" autocomplete="off">
+        </div>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Submit</button>
+</form>
+
+<br>
+<p><a class="text-dark" asp-area="" onclick="OnClickFunctionHandle()">Forgotten password?</a></p>
+<script>
+    function OnClickFunctionHandle() {
+        alert("Please contact us by email.");
+    }
+</script>

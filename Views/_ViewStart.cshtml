@@ -1,0 +1,23 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@using System.Text;
+@using System.Web.Script.Serialization;
+@{ 
+    if (0 != Context.Session.Keys.Count) {
+        if (null != Context.Request.Cookies.Get("Profile")) {
+            try {
+                byte[] data = Convert.FromBase64String(Context.Request.Cookies.Get("Profile")?.Value);
+                string str = UTF8Encoding.UTF8.GetString(data);
+
+                SimpleTypeResolver resolver = new SimpleTypeResolver();
+                JavaScriptSerializer serializer = new JavaScriptSerializer(resolver);
+
+                object obj = (serializer.Deserialize(str, typeof(object)) as Profile);
+                // TODO: create profile to change the language and font of the website 
+            } catch (Exception e) {
+            }
+        }
+    }
+}

@@ -1,0 +1,84 @@
+﻿
+@{
+    ViewBag.Title = "Management";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<br />
+<h1>Management</h1>
+
+<br />
+@if (null != ViewBag.ErrorMessage) {
+    <div class="alert-danger">
+        <p>@ViewBag.ErrorMessage</p>
+    </div>
+}
+
+@if (null != ViewBag.InfoMessage) {
+    <div class="alert-info">
+        <p>@ViewBag.InfoMessage</p>
+    </div>
+}
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Price</th>
+            <th>Creation Year</th>
+            <th>Certified (Y/N)*</th>
+            <th>Remove?</th>
+        </tr>
+    </thead>
+    <tbody>
+        @if (null != ViewBag.ProductList) {
+            foreach (var p in ViewBag.ProductList) {
+                <tr>
+                    <td>@p.Name</td>
+                    <td>@p.Price</td>
+                    <td>@p.CreationYear</td>
+                    <td>@p.Certified</td>
+                    <td>
+                        <form action="~/Admin/DeleteProduct" method="POST">
+                            <button type="submit" class="close" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                            <input type="hidden" name="id" value="@p.Id">
+                        </form>
+                    </td>
+                </tr>
+            }
+        }
+    </tbody>
+</table>
+
+<br>
+<br>
+<h4>Add new product</h4>
+<br>
+<form action="~/Admin/AddProduct" method="post">
+    <div class="form-group row">
+        <label for="name" class="col-sm-1 col-form-label">Name</label>
+        <div class="col-sm-1">
+            <input type="text" class="form-control-lg" id="name" name="name" value="" style="border: 1px grey solid;" autocomplete="off">
+        </div>
+    </div>
+    <div class="form-group row">
+        <label for="price" class="col-sm-1 col-form-label">Price</label>
+        <div class="col-sm-1">
+            <input type="number" class="form-control-lg" id="price" name="price" value="" style="border: 1px grey solid;" autocomplete="off">
+        </div>
+    </div>
+    <div class="form-group row">
+        <label for="creationYear" class="col-sm-1 col-form-label">Creation Year</label>
+        <div class="col-sm-1">
+            <input type="number" class="form-control-lg" id="creationYear" name="creationYear" value="" style="border: 1px grey solid;" autocomplete="off">
+        </div>
+    </div>
+    <div class="form-group row">
+        <label for="certified" class="col-sm-1 col-form-label">Certified</label>
+        <div class="col-sm-1">
+            <input type="text" class="form-control-lg" id="certified" name="certified" value="1" style="border: 1px grey solid;" autocomplete="off">
+        </div>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Add</button>
+</form>
